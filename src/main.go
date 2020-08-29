@@ -12,14 +12,14 @@ func main() {
 	// open a new discord connection
 	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
 	if err != nil {
-		logger.Error().
+		logger.Fatal().
 			Err(err).
 			Msg("Initial Discord connection was refused.")
 	}
 
 	err = discord.Open()
 	if err != nil {
-		logger.Error().
+		logger.Fatal().
 			Err(err).
 			Msg("Discord websocket connection could not be established.")
 	}
