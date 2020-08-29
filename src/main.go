@@ -1,15 +1,20 @@
 package main
 
 import (
+	"os"
+
 	"github.com/bwmarrin/discordgo"
 	"github.com/spidernest-go/logger"
-	"os"
 )
+
+const CHANJOINPART = "334152713594208257"
+
+var discord *discordgo.Session
 
 func main() {
 	logger.Info().Msg("AutoMod 0.1.0 Starting Up.")
 
-	// open a new discord connection
+	// search for discord websocket gateway
 	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
 	if err != nil {
 		logger.Fatal().
@@ -17,6 +22,11 @@ func main() {
 			Msg("Initial Discord connection was refused.")
 	}
 
+	// add event and command handlers
+	discord.AddHandler(evtJoin)
+	discord.AddHandler(evtPart)
+
+	// open a new discord connection
 	err = discord.Open()
 	if err != nil {
 		logger.Fatal().
@@ -25,6 +35,6 @@ func main() {
 	}
 
 	// stay connected until interrupted
+	logger.Info().Msg("AutoMod 0.1.0 Startup Finshed.")
 	<-make(chan struct{})
-
 }
