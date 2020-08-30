@@ -1,5 +1,7 @@
 module github.com/Starz0r/AutoMod
 
+go 1.11
+
 require (
 	github.com/bwmarrin/discordgo v0.22.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
