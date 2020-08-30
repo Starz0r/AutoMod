@@ -1,0 +1,34 @@
+language: go
+
+matrix:
+    include:
+        - os: osx
+          osx_image: xcode7.3
+          go: "1.11.11"
+          env: GO111MODULE=on
+        - os: osx
+          osx_image: xcode8
+          go: "1.11.11"
+          env: GO111MODULE=on
+        - os: osx
+          osx_image: xcode8.3
+          go: "1.11.11"
+          env: GO111MODULE=on
+        - os: linux
+          dist: precise
+          sudo: required
+          go: "1.11.11"
+          env: GO111MODULE=on
+        - os: linux
+          dist: trusty
+          sudo: required
+          go: "1.11.11"
+          env: GO111MODULE=on
+        - os: linux
+          dist: xenial
+          sudo: required
+          go: "1.11.11"
+          env: GO111MODULE=on
+
+          script:
+              - go build -v -i ./src/
