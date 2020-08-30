@@ -31,4 +31,4 @@ matrix:
           env: GO111MODULE=on
 
           script:
-              - go build -v -i ./src/
+              - go build -v -i -o automod ./src/
