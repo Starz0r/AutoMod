@@ -15,6 +15,17 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 		return
 	}
 
+	for i, role = range j.Member.Roles {
+		if role == "729002351398092904" {
+			break
+		}
+
+		if i >= len(j.Member.Roles) {
+			logger.Info().Msg("Unauthorized user attempted to use the silence command.")
+			return
+		}
+	}
+
 	// command check
 	args := strings.Split(j.Content, " ")
 	if args[0] != "!silence" {
