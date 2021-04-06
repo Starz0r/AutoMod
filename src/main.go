@@ -12,7 +12,7 @@ const CHANJOINPART = "334152713594208257"
 var discord *discordgo.Session
 
 func main() {
-	logger.Info().Msg("AutoMod 0.1.2 Starting Up.")
+	logger.Info().Msg("AutoMod 0.2.0 Starting Up.")
 
 	// search for discord websocket gateway
 	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
@@ -38,6 +38,6 @@ func main() {
 	}
 
 	// stay connected until interrupted
-	logger.Info().Msg("AutoMod 0.1.2 Startup Finshed.")
+	logger.Info().Msg("AutoMod 0.2.0 Startup Finshed.")
 	<-make(chan struct{})
 }
