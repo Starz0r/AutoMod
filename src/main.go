@@ -7,12 +7,21 @@ import (
 	"github.com/spidernest-go/logger"
 )
 
+const GUILDIDENT = "82930961544646656"
 const CHANJOINPART = "334152713594208257"
+const ROLESILENCED = "194607151086305282"
 
 var discord *discordgo.Session
 
 func main() {
-	logger.Info().Msg("AutoMod 0.2.0 Starting Up.")
+	go logger.Info().Msg("AutoMod 0.2.0 Starting Up.")
+
+	connectDatabase()
+	retrieveAllTasks()
+
+	for _, task := range TASKS {
+		delegateTask(task)
+	}
 
 	// search for discord websocket gateway
 	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))

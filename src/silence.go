@@ -15,7 +15,7 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 		return
 	}
 
-	for i, role = range j.Member.Roles {
+	for i, role := range j.Member.Roles {
 		if role == "729002351398092904" {
 			break
 		}
