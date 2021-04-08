@@ -57,15 +57,14 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 	}
 
 	// create a task and write it to the current datastore
-	task, err := writeTask(
-		&Task{
-			ID:          0,
-			Event:       "unsilence",
-			RequestedBy: j.Author.ID,
-			Affects:     target.ID,
-			Deadline:    durdate,
-		},
-	)
+	task := &Task{
+		ID:          0,
+		Event:       "unsilence",
+		RequestedBy: j.Author.ID,
+		Affects:     target.ID,
+		Deadline:    durdate,
+	}
+	task, err = writeTask(task)
 	if err != nil {
 		s.GuildMemberRoleRemove(GUILDIDENT, target.ID, ROLESILENCED)
 		logger.Error().Err(err).Msg("Task was not written to datastore, undoing silence.")
