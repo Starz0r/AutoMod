@@ -74,7 +74,7 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 	}
 
 	delegateTask(task)
-	s.ChannelMessageSend(j.ChannelID, "User was silenced successfully! They will be unsilenced at "+durdate.String())
+	s.ChannelMessageSend(j.ChannelID, "User was silenced successfully! They will be unsilenced at "+durdate.Format("Monday, January 2, 2006 15:04:05 MST"))
 
 	// send the targets a message
 	reason := *new(string)
