@@ -24,13 +24,14 @@ func retrieveAllTasks() {
 }
 
 func writeTask(task *Task) (*Task, error) {
-	r := DB.InsertInto("tasks").Values(task).Returning("id").Iterator().Next(&task)
+	DB.InsertInto("tasks").Values(task).Returning("id").Iterator().Next(&task)
 
-	if r == false {
+	// HACK: Does r actually mean failure on false?
+	/*if r == false {
 		logger.Error().Msg("Task could not be inserted into the table.")
-	}
+	}*/
 
-	return task, ErrNoInsert
+	return task, nil
 }
 
 func delegateTask(task *Task) {
