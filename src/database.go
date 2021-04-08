@@ -21,6 +21,6 @@ func connectDatabase() {
 	err := *new(error)
 	DB, err = postgresql.Open(conn)
 	if err != nil {
-		logger.Panic().Msg("Opening the PostgreSQL connection failed.")
+		logger.Panic().Err(err).Msg("Opening the PostgreSQL connection failed.")
 	}
 }

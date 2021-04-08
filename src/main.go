@@ -14,7 +14,7 @@ const ROLESILENCED = "194607151086305282"
 var discord *discordgo.Session
 
 func main() {
-	go logger.Info().Msg("AutoMod 0.2.0 Starting Up.")
+	go logger.Info().Msg("AutoMod 0.2.1 Starting Up.")
 
 	connectDatabase()
 	retrieveAllTasks()
@@ -47,6 +47,6 @@ func main() {
 	}
 
 	// stay connected until interrupted
-	logger.Info().Msg("AutoMod 0.2.0 Startup Finshed.")
+	logger.Info().Msg("AutoMod 0.2.1 Startup Finshed.")
 	<-make(chan struct{})
 }
