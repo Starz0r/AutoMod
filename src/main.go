@@ -14,7 +14,7 @@ const ROLESILENCED = "194607151086305282"
 var discord *discordgo.Session
 
 func main() {
-	go logger.Info().Msg("AutoMod 0.2.2 Starting Up.")
+	go logger.Info().Msg("AutoMod 0.2.3 Starting Up.")
 
 	connectDatabase()
 	retrieveAllTasks()
@@ -34,6 +34,8 @@ func main() {
 	// add event and command handlers
 	discord.AddHandler(evtJoin)
 	discord.AddHandler(evtPart)
+	
+	discord.AddHandler(cmdSilence)
 
 	// set intents
 	discord.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsAll)
@@ -47,6 +49,6 @@ func main() {
 	}
 
 	// stay connected until interrupted
-	logger.Info().Msg("AutoMod 0.2.1 Startup Finshed.")
+	logger.Info().Msg("AutoMod 0.2.3 Startup Finshed.")
 	<-make(chan struct{})
 }
