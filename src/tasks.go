@@ -1,12 +1,15 @@
 package main
 
 import (
+	"errors"
 	"time"
 
 	"github.com/spidernest-go/logger"
 )
 
 var TASKS []*Task
+
+var ErrNoInsert = errors.New("Task was not inserted.")
 
 type Task struct {
 	ID          uint      `db:"id"`
@@ -21,18 +24,13 @@ func retrieveAllTasks() {
 }
 
 func writeTask(task *Task) (*Task, error) {
-	r, err := DB.InsertInto("tasks").Values(task).Exec()
+	r := DB.InsertInto("tasks").Values(task).Returning("id").Iterator().Next(&task)
 
-	if err != nil {
-		logger.Error().Err(err).Msg("Task could not be inserted into the table.")
+	if r == false {
+		logger.Error().Msg("Task could not be inserted into the table.")
 	}
 
-	id, err := r.LastInsertId()
-	if err == nil {
-		task.ID = uint(id)
-	}
-
-	return task, err
+	return task, ErrNoInsert
 }
 
 func delegateTask(task *Task) {
