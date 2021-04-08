@@ -61,7 +61,7 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 		&Task{
 			ID:          0,
 			Event:       "unsilence",
-			RequestedBy: j.Member.User.ID,
+			RequestedBy: j.Author.ID,
 			Affects:     target.ID,
 			Deadline:    durdate,
 		},
