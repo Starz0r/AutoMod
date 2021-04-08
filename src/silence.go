@@ -95,7 +95,7 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 		logger.Warn().Err(err).Msg("User was not notified of silence.")
 		return
 	}
-	_, err = s.ChannelMessageSend(dm.ID, "You've been silenced in the `I Wanna Community` guild server until "+durdate.String()+".\n\n **Duration:** "+durstr+".\n**Reason:** `"+reason+"`.")
+	_, err = s.ChannelMessageSend(dm.ID, "You've been silenced in the `I Wanna Community` guild server until "+durdate.Format("Monday, January 2, 2006 15:04:05 MST")+".\n\n**Duration:** "+durstr+".\n**Reason:** `"+reason+"`.")
 	if err != nil {
 		logger.Warn().Err(err).Msg("User was not notified of silence.")
 		return
