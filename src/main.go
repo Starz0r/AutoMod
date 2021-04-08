@@ -14,7 +14,7 @@ const ROLESILENCED = "194607151086305282"
 var discord *discordgo.Session
 
 func main() {
-	go logger.Info().Msg("AutoMod 0.2.1 Starting Up.")
+	go logger.Info().Msg("AutoMod 0.2.2 Starting Up.")
 
 	connectDatabase()
 	retrieveAllTasks()
