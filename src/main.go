@@ -14,14 +14,9 @@ const ROLESILENCED = "194607151086305282"
 var discord *discordgo.Session
 
 func main() {
-	go logger.Info().Msg("AutoMod 0.2.5 Starting Up.")
+	go logger.Info().Msg("AutoMod 0.2.6 Starting Up.")
 
 	connectDatabase()
-	retrieveAllTasks()
-
-	for _, task := range TASKS {
-		delegateTask(task)
-	}
 
 	// search for discord websocket gateway
 	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
@@ -49,6 +44,15 @@ func main() {
 	}
 
 	// stay connected until interrupted
-	logger.Info().Msg("AutoMod 0.2.5 Startup Finshed.")
+	logger.Info().Msg("AutoMod 0.2.6 Startup Finshed.")
+	logger.Info().Msg("Retrieving Tasks.")
+	retrieveAllTasks()
+	
+	logger.Info().Msg("Delegating Tasks.")
+	for _, task := range TASKS {
+		delegateTask(task)
+	}
+	
+	logger.Info().Msg("Waiting For Interrupt Signal.")
 	<-make(chan struct{})
 }
