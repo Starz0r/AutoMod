@@ -83,7 +83,7 @@ func cmdSilence(s *discordgo.Session, j *discordgo.MessageCreate) {
 		var combine = func(strs []string) string {
 			longstr := ""
 			for _, str := range strs {
-				longstr += str
+				longstr += str + " "
 			}
 			return longstr
 		}
