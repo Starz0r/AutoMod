@@ -24,7 +24,7 @@ func retrieveAllTasks() {
 }
 
 func writeTask(task *Task) (*Task, error) {
-	DB.InsertInto("tasks").Values(task).Returning("id").Iterator().Next(&task)
+	DB.InsertInto("tasks").Values(task).Returning("id", "event", "reqeusted_by", "affects", "deadline").Iterator().Next(&task)
 
 	// HACK: Does r actually mean failure on false?
 	/*if r == false {
