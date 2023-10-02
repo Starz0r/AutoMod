@@ -9,14 +9,11 @@ import (
 
 const GUILDIDENT = "82930961544646656"
 const CHANJOINPART = "334152713594208257"
-const ROLESILENCED = "194607151086305282"
 
 var discord *discordgo.Session
 
 func main() {
-	go logger.Info().Msg("AutoMod 0.2.12 Starting Up.")
-
-	connectDatabase()
+	go logger.Info().Msg("AutoMod 0.2.13 Starting Up.")
 
 	// search for discord websocket gateway
 	err := *new(error)
@@ -31,8 +28,6 @@ func main() {
 	discord.AddHandler(evtJoin)
 	discord.AddHandler(evtPart)
 
-	discord.AddHandler(cmdSilence)
-
 	// set intents
 	discord.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsAll)
 
@@ -45,14 +40,7 @@ func main() {
 	}
 
 	// stay connected until interrupted
-	logger.Info().Msg("AutoMod 0.2.10 Startup Finshed.")
-	logger.Info().Msg("Retrieving Tasks.")
-	retrieveAllTasks()
-
-	logger.Info().Msg("Delegating Tasks.")
-	for _, task := range TASKS {
-		delegateTask(task)
-	}
+	logger.Info().Msg("AutoMod 0.2.13 Startup Finished.")
 
 	logger.Info().Msg("Waiting For Interrupt Signal.")
 	<-make(chan struct{})
